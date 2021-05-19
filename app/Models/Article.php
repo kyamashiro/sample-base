@@ -2,8 +2,12 @@
 
 namespace App\Models;
 
+use Database\Factories\ArticleFactory;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 use Kyslik\ColumnSortable\Sortable;
 
 /**
@@ -14,26 +18,28 @@ use Kyslik\ColumnSortable\Sortable;
  * @property string $body
  * @property int $category_id
  * @property int $is_public
- * @property \Illuminate\Support\Carbon $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Category|null $category
+ * @property Carbon $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Category|null $category
  * @property-read string $short_body
- * @method static \Database\Factories\ArticleFactory factory(...$parameters)
- * @method static \Illuminate\Database\Eloquent\Builder|Article newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Article newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Article query()
- * @method static \Illuminate\Database\Eloquent\Builder|Article whereBody($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Article whereCategoryId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Article whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Article whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Article whereIsPublic($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Article whereTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Article whereUpdatedAt($value)
- * @mixin \Eloquent
+ * @method static ArticleFactory factory(...$parameters)
+ * @method static Builder|Article newModelQuery()
+ * @method static Builder|Article newQuery()
+ * @method static Builder|Article query()
+ * @method static Builder|Article whereBody($value)
+ * @method static Builder|Article whereCategoryId($value)
+ * @method static Builder|Article whereCreatedAt($value)
+ * @method static Builder|Article whereId($value)
+ * @method static Builder|Article whereIsPublic($value)
+ * @method static Builder|Article whereTitle($value)
+ * @method static Builder|Article whereUpdatedAt($value)
+ * @mixin Eloquent
  */
 class Article extends Model
 {
     use HasFactory, Sortable;
+
+    protected $fillable = ['title', 'body', 'category_id', 'is_public'];
 
     public $sortable = ['id',
         'title',

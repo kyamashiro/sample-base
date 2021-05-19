@@ -19,6 +19,7 @@ class CreateArticlesTable extends Migration
             $table->text('body');
             $table->foreignId('category_id');
             $table->foreign('category_id')->references('id')->on('categories');
+            $table->boolean('is_public');
             $table->dateTime('created_at');
             $table->dateTime('updated_at')->nullable();
         });

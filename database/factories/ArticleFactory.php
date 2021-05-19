@@ -22,7 +22,10 @@ class ArticleFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'title' => $this->faker->unique()->sentence,
+            'body' => $this->faker->unique()->paragraph,
+            'is_public' => $this->faker->boolean,
+            'category_id' => $this->faker->numberBetween(1, 10),
         ];
     }
 }

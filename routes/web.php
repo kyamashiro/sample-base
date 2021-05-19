@@ -25,4 +25,3 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('/articles', ArticleController::class);
 });
-

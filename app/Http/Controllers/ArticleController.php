@@ -20,7 +20,7 @@ class ArticleController extends Controller
     public function index()
     {
         return view('articles/index')->with([
-            'articles' => Article::query()->sortable()->paginate()
+            'articles' => Article::query()->sortable()->paginate(),
         ]);
     }
 
@@ -32,7 +32,7 @@ class ArticleController extends Controller
     public function create()
     {
         return view('articles/create')->with([
-            'categories' => Category::query()->pluck('name', 'id')
+            'categories' => Category::query()->pluck('name', 'id'),
         ]);
     }
 
@@ -45,6 +45,7 @@ class ArticleController extends Controller
     public function store(ArticleRequest $request)
     {
         Article::create($request->all());
+
         return redirect('articles')->with('flash_message', '記事を保存しました');
     }
 
@@ -69,7 +70,7 @@ class ArticleController extends Controller
     {
         return view('articles/edit')->with([
             'categories' => Category::query()->pluck('name', 'id'),
-            'article' => $article
+            'article' => $article,
         ]);
     }
 
@@ -83,6 +84,7 @@ class ArticleController extends Controller
     public function update(ArticleRequest $request, Article $article)
     {
         $article->update($request->all());
+
         return redirect('articles')->with('flash_message', '記事を更新しました');
     }
 
@@ -95,6 +97,7 @@ class ArticleController extends Controller
     public function destroy(Article $article)
     {
         $article->delete();
+
         return redirect('articles')->with('flash_message', '記事を削除しました');
     }
 }

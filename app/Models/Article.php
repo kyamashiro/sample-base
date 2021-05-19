@@ -11,7 +11,7 @@ use Illuminate\Support\Carbon;
 use Kyslik\ColumnSortable\Sortable;
 
 /**
- * App\Models\Article
+ * App\Models\Article.
  *
  * @property int $id
  * @property string $title
@@ -37,7 +37,8 @@ use Kyslik\ColumnSortable\Sortable;
  */
 class Article extends Model
 {
-    use HasFactory, Sortable;
+    use HasFactory;
+    use Sortable;
 
     protected $fillable = ['title', 'body', 'category_id', 'is_public'];
 
@@ -47,7 +48,7 @@ class Article extends Model
         'category_id',
         'is_public',
         'created_at',
-        'updated_at'];
+        'updated_at',];
 
     public function category()
     {
@@ -55,7 +56,7 @@ class Article extends Model
     }
 
     /**
-     * 記事の内容を省略して表示する
+     * 記事の内容を省略して表示する.
      * @return string
      */
     public function getShortBodyAttribute(): string
@@ -64,6 +65,7 @@ class Article extends Model
         if (mb_strlen($this->body) > $limit) {
             return mb_substr($this->body, 0, $limit) . '...';
         }
+
         return $this->body;
     }
 }

@@ -27,6 +27,7 @@ use Kyslik\ColumnSortable\Sortable;
  * @method static Builder|Category whereName($value)
  * @method static Builder|Category whereUpdatedAt($value)
  * @mixin Eloquent
+ * @method static Builder|Category sortable($defaultParameters = null)
  */
 class Category extends Model
 {

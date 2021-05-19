@@ -34,6 +34,7 @@ use Kyslik\ColumnSortable\Sortable;
  * @method static Builder|Article whereTitle($value)
  * @method static Builder|Article whereUpdatedAt($value)
  * @mixin Eloquent
+ * @method static Builder|Article sortable($defaultParameters = null)
  */
 class Article extends Model
 {
@@ -48,7 +49,7 @@ class Article extends Model
         'category_id',
         'is_public',
         'created_at',
-        'updated_at',];
+        'updated_at', ];
 
     public function category()
     {
@@ -63,7 +64,7 @@ class Article extends Model
     {
         $limit = 30;
         if (mb_strlen($this->body) > $limit) {
-            return mb_substr($this->body, 0, $limit) . '...';
+            return mb_substr($this->body, 0, $limit).'...';
         }
 
         return $this->body;

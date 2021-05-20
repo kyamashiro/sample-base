@@ -45,6 +45,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 {{ Form::open(['route' => ['articles.update', $article->id], 'method' => 'PUT']) }}
+                {{ Form::hidden('redirect_to', old('redirect_to', URL::previous())) }}
                 <div class="form-group row">
                     {{ Form::label('title', 'タイトル') }}
                     {{ Form::text('title', $article->title , ['class' => 'form-control']) }}
@@ -62,7 +63,8 @@
                 </div>
                 <div class="d-flex justify-content-end">
                     <div class="form-group row">
-                        {{ Form::submit('更新', ['class' => 'btn btn-primary']) }}
+                        {{ Form::submit('更新', ['class' => 'btn btn-primary mr-5']) }}
+                        <a href="{{ old('redirect_to', URL::previous())}}" class="btn btn-default border">戻る</a>
                     </div>
                 </div>
                 {{ Form::close() }}

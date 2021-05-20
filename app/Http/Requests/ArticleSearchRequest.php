@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ArticleRequest extends FormRequest
+class ArticleSearchRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,10 @@ class ArticleRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|max:255',
-            'body' => 'required|max:255',
-            'category_id' => 'required',
-            'is_public' => 'required|boolean',
+            'title' => 'max:255',
+            'body' => 'max:255',
+            'created_at_from' => ['nullable', 'date'],
+            'created_at_to' => ['nullable', 'date'],
         ];
     }
 
@@ -36,8 +36,8 @@ class ArticleRequest extends FormRequest
         return [
             'title' => 'タイトル',
             'body' => '内容',
-            'category_id' => 'カテゴリID',
-            'is_public' => '公開/非公開',
+            'created_at_from' => '作成日開始',
+            'created_at_to' => '作成日終了',
         ];
     }
 }

@@ -23,5 +23,9 @@ Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::resource('/articles', ArticleController::class);
+
+//    Route::get('/articles/search', [ArticleController::class, 'search'])->name('articles.search');
+    Route::resource('/articles', ArticleController::class)->except([
+        'show',
+    ]);
 });

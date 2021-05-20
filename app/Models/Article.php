@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Requests\ArticleSearchRequest;
 use Database\Factories\ArticleFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
@@ -35,6 +36,7 @@ use Kyslik\ColumnSortable\Sortable;
  * @method static Builder|Article whereUpdatedAt($value)
  * @mixin Eloquent
  * @method static Builder|Article sortable($defaultParameters = null)
+ * @method static Builder|Article searchQuery(\App\Http\Requests\ArticleSearchRequest $request)
  */
 class Article extends Model
 {
@@ -68,5 +70,31 @@ class Article extends Model
         }
 
         return $this->body;
+    }
+
+    /**
+     * @param Builder $query
+     * @param ArticleSearchRequest $request
+     * @return Builder
+     */
+    public function scopeSearchQuery(Builder $query, ArticleSearchRequest $request): Builder
+    {
+        $query
+            ->where('articles.title', 'LIKE', "%{$request->title}%")
+            ->where('articles.body', 'LIKE', "%{$request->body}%")
+            ->when($request->category_id, function ($query) use ($request) {
+                return $query->where('articles.category_id', $request->category_id);
+            });
+
+        // テーブル名をつけないとSortableでLEFTJOINしている影響で、ambiguous columnsのSQLエラーが出る
+        if ($request->created_at_from) {
+            $query->where('articles.created_at', '>=', $request->created_at_from);
+        }
+
+        if ($request->created_at_to) {
+            $query->where('articles.created_at', '<=', $request->created_at_to);
+        }
+
+        return $query;
     }
 }

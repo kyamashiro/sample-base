@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ArticleRequest;
+use App\Http\Requests\ArticleSearchRequest;
 use App\Models\Article;
 use App\Models\Category;
 use Illuminate\Contracts\View\View;
@@ -15,12 +16,15 @@ class ArticleController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return View|Article[]
+     * @param ArticleSearchRequest $request
+     * @return View
      */
-    public function index()
+    public function index(ArticleSearchRequest $request)
     {
         return view('articles/index')->with([
-            'articles' => Article::query()->sortable()->paginate(),
+            'articles' => Article::searchQuery($request)->sortable()->paginate(),
+            'categories' => array_merge([0 => '選択してください'], Category::query()->pluck('name', 'id')->toArray()),
+            'request' => $request,
         ]);
     }
 

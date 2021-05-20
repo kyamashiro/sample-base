@@ -22,19 +22,19 @@
         {{ Form::open(['route' => 'articles.index', 'method' => 'GET']) }}
         <div class="border mb-5 py-4">
             <div class="d-flex justify-content-center">
-                <div class="col-10">
+                <div class="col-md-10">
                     <div class="form-group row">
-                        <div class="col col-4 mr-2">
+                        <div class="col-md-4 mr-2">
                             {{ Form::label('title', 'タイトル') }}
                             {{ Form::text('title', old('title', $request->title), ['class' => 'form-control']) }}
                         </div>
-                        <div class="col">
+                        <div class="col-md">
                             {{ Form::label('body', '内容') }}
                             {{ Form::text('body', old('body', $request->body), ['class' => 'form-control']) }}
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col col-2">
+                        <div class="col-md-2">
                             {{ Form::label('category_id', 'カテゴリ') }}
                             {{ Form::select('category_id', $categories, old('category_id', $request->category_id), ['class' => 'form-control']) }}
                         </div>
@@ -43,13 +43,13 @@
                         <div class="col">
                             {{ Form::label('created_at', '作成日') }}
                             <div class="row">
-                                <div class="col col-2">
+                                <div class="col-md-2">
                                     {{ Form::datetimeLocal('created_at_from', old('created_at_from', $request->created_at_from), ['class' => 'form-control']) }}
                                 </div>
                                 <span class="d-flex align-items-center">
                                     〜
                                 </span>
-                                <div class="col col-2">
+                                <div class="col-md-2">
                                     {{ Form::datetimeLocal('created_at_to', old('created_at_to', $request->created_at_to), ['class' => 'form-control']) }}
                                 </div>
                             </div>
@@ -65,7 +65,7 @@
         </div>
         {{ Form::close() }}
         <div class="row justify-content-center">
-            <div class="col-xl-12">
+            <div class="col-md-12">
                 <div class="d-flex justify-content-between">
                     <div>
                         <p>{{ $articles->count() }}件 / {{ $articles->total() }}件中</p>

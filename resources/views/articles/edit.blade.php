@@ -43,7 +43,7 @@
         </div>
 
         <div class="row justify-content-center">
-            <div class="col-lg-12">
+            <div class="col-12">
                 {{ Form::open(['route' => ['articles.update', $article->id], 'method' => 'PUT']) }}
                 {{ Form::hidden('redirect_to', old('redirect_to', URL::previous())) }}
                 <div class="form-group row">

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -28,4 +29,12 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('/articles', ArticleController::class)->except([
         'show',
     ]);
+
+    // 利用者メッセージ画面
+    Route::resource('/messages', MessageController::class);
+
+    // 店舗柄メッセージ画面
+    Route::prefix('shops')->group(function () {
+        Route::resource('/messages', MessageController::class);
+    });
 });

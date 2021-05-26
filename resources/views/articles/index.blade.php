@@ -68,7 +68,8 @@
             <div class="col-md-12">
                 <div class="d-flex justify-content-between">
                     <div>
-                        <p>{{ $articles->count() }}件 / {{ $articles->total() }}件中</p>
+                        <p>{{ (($articles->currentPage() -1) * $articles->perPage() + 1) + (count($articles) -1)  }}件
+                            / {{ $articles->total() }}件中</p>
                     </div>
                     <div>
                         <p class="btn btn-primary">

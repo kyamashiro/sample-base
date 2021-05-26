@@ -15,7 +15,7 @@ class MessageController extends Controller
     public function index()
     {
         return view('messages/index')->with([
-            'messages' => ShopMessage::where('user_id', \Auth::id())->paginate(),
+            'messages' => ShopMessage::where('user_id', \Auth::id())->orderByDesc('sent_at')->paginate(),
         ]);
     }
 }
